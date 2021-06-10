@@ -1,0 +1,18 @@
+{
+	"name": "CopyFromPCLinkedService1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "This Linked Service is for copying a flat file (comma delimited) from PC to Azure Data Factory using SSIS Integration Runtime",
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\STEPHENIK\\Aza Docs",
+			"userId": "steven",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2MjNhZDhkZC01OTg2LTRiMWUtOWUzMC0xMjM4YzBkZTNhNGMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "trainingSelfHostedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

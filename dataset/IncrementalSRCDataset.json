@@ -1,0 +1,13 @@
+{
+	"name": "IncrementalSRCDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Stream1Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "",
+			"table": "CustomerData-Stream1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,87 @@
+{
+	"name": "SCDType2DataFlow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SCDStagingDataset",
+						"type": "DatasetReference"
+					},
+					"name": "STGSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDType2Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "MaxKey"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDType2Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "DimSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SCDType2Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SinkIntoDimTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDType2Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDimRecordExists"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDType2Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "Lookup1"
+				},
+				{
+					"name": "New"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "AlterRow1"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "DerivedColumn3"
+				},
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "AlterRow2"
+				}
+			],
+			"script": "source(output(\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> STGSource\nsource(output(\n\t\tMAXKEY as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'select max(isnull(SalesRep_Key, 0)) as MAXKEY\\nfrom dbo.Dim_SalesRepT2',\n\tformat: 'query') ~> MaxKey\nsource(output(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string,\n\t\tCurrent_Flag as integer,\n\t\tVerifyField as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DimSource\nSTGSource, MaxKey join(1==1,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nDimSource select(mapColumn(\n\t\tDimSalesRep_Key = SalesRep_Key,\n\t\tDimSalesRep_Number = SalesRep_Number,\n\t\tDimSalesRep_Name = SalesRep_Name,\n\t\tDimSalesRep_Department = SalesRep_Department,\n\t\tDimCurrent_Flag = Current_Flag,\n\t\tDimVerifyField = VerifyField\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nJoin1, Select1 lookup(SalesRep_Number == DimSalesRep_Number,\n\tmultiple: true,\n\tbroadcast: 'auto')~> Lookup1\nLookup1 split(isNull(DimSalesRep_Number),\n\tdisjoint: false) ~> New@(New, DoesExist)\nNew@New derive(Current_Flag = 1,\n\t\tVerifyField = 'NEW') ~> DerivedColumn1\nDerivedColumn1 alterRow(insertIf(true())) ~> AlterRow1\nNew@DoesExist derive(NCurrent_Flag = 1,\n\t\tVerifyField = 'NEW') ~> DerivedColumn2\nNew@DoesExist derive(DCurrent_Flag = 0,\n\t\tVerifyField = 'UPDATE') ~> DerivedColumn3\nDerivedColumn3 filter(DimSalesRep_Key <= MAXKEY) ~> Filter1\nFilter1 alterRow(updateIf(DimSalesRep_Key<=MAXKEY)) ~> AlterRow2\nAlterRow1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string,\n\t\tCurrent_Flag as integer,\n\t\tVerifyField as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesRep_Number,\n\t\tSalesRep_Name,\n\t\tSalesRep_Department,\n\t\tCurrent_Flag,\n\t\tVerifyField\n\t)) ~> SinkIntoDimTable\nDerivedColumn2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string,\n\t\tCurrent_Flag as integer,\n\t\tVerifyField as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesRep_Number,\n\t\tSalesRep_Name,\n\t\tSalesRep_Department,\n\t\tCurrent_Flag = NCurrent_Flag,\n\t\tVerifyField\n\t)) ~> SinkToDimRecordExists\nAlterRow2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string,\n\t\tCurrent_Flag as integer,\n\t\tVerifyField as string\n\t),\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:true,\n\tupsertable:false,\n\tkeys:['SalesRep_Key'],\n\tformat: 'table',\n\tpreSQLs:['SET IDENTITY_INSERT dbo.Dim_SalesRepT2 On'],\n\tpostSQLs:['SET IDENTITY_INSERT dbo.Dim_SalesRepT2 OFF'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesRep_Key = DimSalesRep_Key,\n\t\tSalesRep_Number,\n\t\tSalesRep_Name,\n\t\tSalesRep_Department,\n\t\tCurrent_Flag = DCurrent_Flag,\n\t\tVerifyField\n\t)) ~> sink1"
+		}
+	}
+}

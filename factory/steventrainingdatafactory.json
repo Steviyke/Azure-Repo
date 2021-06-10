@@ -1,0 +1,9 @@
+{
+	"name": "steventrainingdatafactory",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9872ff16-5ba4-4ee1-a666-3b2549e09af8",
+		"tenantId": "e42fdae0-299d-4fdf-a42b-d5c4eb874217"
+	}
+}

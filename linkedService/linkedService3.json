@@ -1,0 +1,14 @@
+{
+	"name": "linkedService3",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "e42fdae0-299d-4fdf-a42b-d5c4eb874217",
+			"subscriptionId": "b0900eb4-959a-4b51-aefc-1a35f7de135d",
+			"resourceGroupName": "TrainingResourceGroup"
+		}
+	}
+}

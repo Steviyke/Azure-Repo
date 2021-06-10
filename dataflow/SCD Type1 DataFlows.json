@@ -1,0 +1,52 @@
+{
+	"name": "SCD Type1 DataFlows",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SCDStagingDataset",
+						"type": "DatasetReference"
+					},
+					"name": "StagingSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDDimSourceDataset",
+						"type": "DatasetReference"
+					},
+					"name": "DimSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SCDDimSourceDataset",
+						"type": "DatasetReference"
+					},
+					"name": "SinkIntoDimTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCDDimSourceDataset",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDimNotExist"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DoesExist"
+				},
+				{
+					"name": "AlterExistingRow"
+				},
+				{
+					"name": "NotExists"
+				}
+			],
+			"script": "source(output(\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> StagingSource\nsource(output(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DimSource\nStagingSource, DimSource exists(StagingSource@SalesRep_Number == DimSource@SalesRep_Number,\n\tnegate:false,\n\tbroadcast: 'auto')~> DoesExist\nDoesExist alterRow(updateIf(1==1)) ~> AlterExistingRow\nStagingSource, DimSource exists(StagingSource@SalesRep_Number == DimSource@SalesRep_Number,\n\tnegate:true,\n\tbroadcast: 'auto')~> NotExists\nAlterExistingRow sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string\n\t),\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:true,\n\tupsertable:false,\n\tkeys:['SalesRep_Number'],\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesRep_Number,\n\t\tSalesRep_Name,\n\t\tSalesRep_Department\n\t)) ~> SinkIntoDimTable\nNotExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesRep_Key as integer,\n\t\tSalesRep_Number as integer,\n\t\tSalesRep_Name as string,\n\t\tSalesRep_Department as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> SinkToDimNotExist"
+		}
+	}
+}

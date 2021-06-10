@@ -1,0 +1,17 @@
+{
+	"name": "Steam2Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "",
+			"table": "CustomerData-Default"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

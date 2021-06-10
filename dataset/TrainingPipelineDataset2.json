@@ -1,0 +1,23 @@
+{
+	"name": "TrainingPipelineDataset2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "IDCol",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "trainingTable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

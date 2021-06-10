@@ -1,0 +1,19 @@
+{
+	"name": "TrainingTrigger",
+	"properties": {
+		"description": "This Trigger fires the execution of the trainingpipeline",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2021-06-03T18:51:00Z",
+				"endTime": "2021-06-04T16:15:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

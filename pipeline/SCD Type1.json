@@ -1,0 +1,35 @@
+{
+	"name": "SCD Type1",
+	"properties": {
+		"description": "This is a Pipeline for executing a slowly changing dimension Type 1, where NO History is required in the Dimension table",
+		"activities": [
+			{
+				"name": "SCD Type 1 Data Flow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SCD Type1 DataFlows",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-06-08T09:17:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
