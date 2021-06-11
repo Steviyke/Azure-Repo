@@ -1,0 +1,26 @@
+{
+	"name": "SynapseDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SynapseLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "copy_to_demo"
+		}
+	}
+}
