@@ -1,0 +1,171 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "steventrainingdatafactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorageGen2LinkedService_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"value": ""
+		},
+		"CopyFromPCLinkedService1_password": {
+			"value": ""
+		},
+		"CopyFromPClinkedService_password": {
+			"value": ""
+		},
+		"CopyFrpmPCLinkedService_password": {
+			"value": ""
+		},
+		"FileServer1_password": {
+			"value": ""
+		},
+		"FileServer2_password": {
+			"value": ""
+		},
+		"FileServer3_password": {
+			"value": ""
+		},
+		"FileServer4_password": {
+			"value": ""
+		},
+		"IncrementalLinkService_connectionString": {
+			"value": ""
+		},
+		"IncrementalLinkedServiced_connectionString": {
+			"value": ""
+		},
+		"SynapseLinkedService_connectionString": {
+			"value": ""
+		},
+		"SynapseStagingLinkedService_accountKey": {
+			"value": ""
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"linkedService2_connectionString": {
+			"value": ""
+		},
+		"linkedService4_servicePrincipalKey": {
+			"value": ""
+		},
+		"traininglinkedservice_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sqlva7bmrgslahm7vu.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorageGen2LinkedService_properties_typeProperties_url": {
+			"value": "https://datalakegen2storageacct.dfs.core.windows.net"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_tenant": {
+			"value": "steventrainingdatafactory"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_subscriptionId": {
+			"value": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_resourceGroupName": {
+			"value": "TrainingResourceGroup"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://StevenTrainingKeys.vault.azure.net/"
+		},
+		"AzureKeyVaultDataLake_properties_typeProperties_baseUrl": {
+			"value": "https://StevenTrainingKeys.vault.azure.net/"
+		},
+		"CopyFromPCLinkedService1_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\Aza Docs"
+		},
+		"CopyFromPCLinkedService1_properties_typeProperties_userId": {
+			"value": "steven"
+		},
+		"CopyFromPClinkedService_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\Data Factory v2"
+		},
+		"CopyFromPClinkedService_properties_typeProperties_userId": {
+			"value": "steven"
+		},
+		"CopyFrpmPCLinkedService_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\Aza Docs"
+		},
+		"CopyFrpmPCLinkedService_properties_typeProperties_userId": {
+			"value": "steven"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\PowerBI Materials"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"value": "steven4great@gmail.com"
+		},
+		"FileServer2_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\PowerBI Materials"
+		},
+		"FileServer2_properties_typeProperties_userId": {
+			"value": "steven"
+		},
+		"FileServer3_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\Data Factory Files"
+		},
+		"FileServer3_properties_typeProperties_userId": {
+			"value": "STEPHENIK"
+		},
+		"FileServer4_properties_typeProperties_host": {
+			"value": "\\\\STEPHENIK\\Data Factory Files"
+		},
+		"FileServer4_properties_typeProperties_userId": {
+			"value": "Steven"
+		},
+		"SynapseStagingLinkedService_properties_typeProperties_url": {
+			"value": "https://datalakegen2storageacct.dfs.core.windows.net"
+		},
+		"linkedService3_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService3_properties_typeProperties_tenant": {
+			"value": "e42fdae0-299d-4fdf-a42b-d5c4eb874217"
+		},
+		"linkedService3_properties_typeProperties_subscriptionId": {
+			"value": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"linkedService3_properties_typeProperties_resourceGroupName": {
+			"value": "TrainingResourceGroup"
+		},
+		"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService4_properties_typeProperties_servicePrincipalId": {
+			"value": "eab2cd77-24dd-4e71-84e1-86460bb25391"
+		},
+		"linkedService4_properties_typeProperties_tenant": {
+			"value": "e42fdae0-299d-4fdf-a42b-d5c4eb874217"
+		},
+		"linkedService4_properties_typeProperties_subscriptionId": {
+			"value": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"linkedService4_properties_typeProperties_resourceGroupName": {
+			"value": "TrainingResourceGroup"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

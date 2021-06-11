@@ -1,0 +1,486 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "steventrainingdatafactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDataLakeStorageGen2LinkedService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorageGen2LinkedService'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase3'"
+		},
+		"CopyFromPCLinkedService1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'CopyFromPCLinkedService1'"
+		},
+		"CopyFromPClinkedService_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'CopyFromPClinkedService'"
+		},
+		"CopyFrpmPCLinkedService_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'CopyFrpmPCLinkedService'"
+		},
+		"FileServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer1'"
+		},
+		"FileServer2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer2'"
+		},
+		"FileServer3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer3'"
+		},
+		"FileServer4_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer4'"
+		},
+		"IncrementalLinkService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'IncrementalLinkService'"
+		},
+		"IncrementalLinkedServiced_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'IncrementalLinkedServiced'"
+		},
+		"SynapseLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SynapseLinkedService'"
+		},
+		"SynapseStagingLinkedService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'SynapseStagingLinkedService'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"linkedService2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService2'"
+		},
+		"linkedService4_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService4'"
+		},
+		"traininglinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'traininglinkedservice'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sqlva7bmrgslahm7vu.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorageGen2LinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakegen2storageacct.dfs.core.windows.net"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "steventrainingdatafactory"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"AzureDataLakeStoreLinkedService_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "TrainingResourceGroup"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://StevenTrainingKeys.vault.azure.net/"
+		},
+		"AzureKeyVaultDataLake_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://StevenTrainingKeys.vault.azure.net/"
+		},
+		"CopyFromPCLinkedService1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\Aza Docs"
+		},
+		"CopyFromPCLinkedService1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "steven"
+		},
+		"CopyFromPClinkedService_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\Data Factory v2"
+		},
+		"CopyFromPClinkedService_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "steven"
+		},
+		"CopyFrpmPCLinkedService_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\Aza Docs"
+		},
+		"CopyFrpmPCLinkedService_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "steven"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\PowerBI Materials"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "steven4great@gmail.com"
+		},
+		"FileServer2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\PowerBI Materials"
+		},
+		"FileServer2_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "steven"
+		},
+		"FileServer3_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\Data Factory Files"
+		},
+		"FileServer3_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "STEPHENIK"
+		},
+		"FileServer4_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\STEPHENIK\\Data Factory Files"
+		},
+		"FileServer4_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "Steven"
+		},
+		"SynapseStagingLinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakegen2storageacct.dfs.core.windows.net"
+		},
+		"linkedService3_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "e42fdae0-299d-4fdf-a42b-d5c4eb874217"
+		},
+		"linkedService3_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"linkedService3_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "TrainingResourceGroup"
+		},
+		"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://trainingdatalake1.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService4_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "eab2cd77-24dd-4e71-84e1-86460bb25391"
+		},
+		"linkedService4_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "e42fdae0-299d-4fdf-a42b-d5c4eb874217"
+		},
+		"linkedService4_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "b0900eb4-959a-4b51-aefc-1a35f7de135d"
+		},
+		"linkedService4_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "TrainingResourceGroup"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "steventrainingdatafactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureDataLakeStorageGen2LinkedService_accountKey": {
+						"value": "[parameters('AzureDataLakeStorageGen2LinkedService_accountKey')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureSqlDatabase2_connectionString": {
+						"value": "[parameters('AzureSqlDatabase2_connectionString')]"
+					},
+					"AzureSqlDatabase3_connectionString": {
+						"value": "[parameters('AzureSqlDatabase3_connectionString')]"
+					},
+					"IncrementalLinkService_connectionString": {
+						"value": "[parameters('IncrementalLinkService_connectionString')]"
+					},
+					"IncrementalLinkedServiced_connectionString": {
+						"value": "[parameters('IncrementalLinkedServiced_connectionString')]"
+					},
+					"SynapseLinkedService_connectionString": {
+						"value": "[parameters('SynapseLinkedService_connectionString')]"
+					},
+					"SynapseStagingLinkedService_accountKey": {
+						"value": "[parameters('SynapseStagingLinkedService_accountKey')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
+					"linkedService2_connectionString": {
+						"value": "[parameters('linkedService2_connectionString')]"
+					},
+					"linkedService4_servicePrincipalKey": {
+						"value": "[parameters('linkedService4_servicePrincipalKey')]"
+					},
+					"traininglinkedservice_connectionString": {
+						"value": "[parameters('traininglinkedservice_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorageGen2LinkedService_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorageGen2LinkedService_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStoreLinkedService_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('AzureDataLakeStoreLinkedService_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"AzureDataLakeStoreLinkedService_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeStoreLinkedService_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeStoreLinkedService_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureDataLakeStoreLinkedService_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureDataLakeStoreLinkedService_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureDataLakeStoreLinkedService_properties_typeProperties_resourceGroupName')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"AzureKeyVaultDataLake_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVaultDataLake_properties_typeProperties_baseUrl')]"
+					},
+					"SynapseStagingLinkedService_properties_typeProperties_url": {
+						"value": "[parameters('SynapseStagingLinkedService_properties_typeProperties_url')]"
+					},
+					"linkedService3_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('linkedService3_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"linkedService3_properties_typeProperties_tenant": {
+						"value": "[parameters('linkedService3_properties_typeProperties_tenant')]"
+					},
+					"linkedService3_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('linkedService3_properties_typeProperties_subscriptionId')]"
+					},
+					"linkedService3_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('linkedService3_properties_typeProperties_resourceGroupName')]"
+					},
+					"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('linkedService4_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"linkedService4_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('linkedService4_properties_typeProperties_servicePrincipalId')]"
+					},
+					"linkedService4_properties_typeProperties_tenant": {
+						"value": "[parameters('linkedService4_properties_typeProperties_tenant')]"
+					},
+					"linkedService4_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('linkedService4_properties_typeProperties_subscriptionId')]"
+					},
+					"linkedService4_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('linkedService4_properties_typeProperties_resourceGroupName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "steventrainingdatafactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'steventrainingdatafactory_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "steventrainingdatafactory_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CopyFromPCLinkedService1_password": {
+						"value": "[parameters('CopyFromPCLinkedService1_password')]"
+					},
+					"CopyFromPClinkedService_password": {
+						"value": "[parameters('CopyFromPClinkedService_password')]"
+					},
+					"CopyFrpmPCLinkedService_password": {
+						"value": "[parameters('CopyFrpmPCLinkedService_password')]"
+					},
+					"FileServer1_password": {
+						"value": "[parameters('FileServer1_password')]"
+					},
+					"FileServer2_password": {
+						"value": "[parameters('FileServer2_password')]"
+					},
+					"FileServer3_password": {
+						"value": "[parameters('FileServer3_password')]"
+					},
+					"FileServer4_password": {
+						"value": "[parameters('FileServer4_password')]"
+					},
+					"CopyFromPCLinkedService1_properties_typeProperties_host": {
+						"value": "[parameters('CopyFromPCLinkedService1_properties_typeProperties_host')]"
+					},
+					"CopyFromPCLinkedService1_properties_typeProperties_userId": {
+						"value": "[parameters('CopyFromPCLinkedService1_properties_typeProperties_userId')]"
+					},
+					"CopyFromPClinkedService_properties_typeProperties_host": {
+						"value": "[parameters('CopyFromPClinkedService_properties_typeProperties_host')]"
+					},
+					"CopyFromPClinkedService_properties_typeProperties_userId": {
+						"value": "[parameters('CopyFromPClinkedService_properties_typeProperties_userId')]"
+					},
+					"CopyFrpmPCLinkedService_properties_typeProperties_host": {
+						"value": "[parameters('CopyFrpmPCLinkedService_properties_typeProperties_host')]"
+					},
+					"CopyFrpmPCLinkedService_properties_typeProperties_userId": {
+						"value": "[parameters('CopyFrpmPCLinkedService_properties_typeProperties_userId')]"
+					},
+					"FileServer1_properties_typeProperties_host": {
+						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
+					},
+					"FileServer1_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
+					},
+					"FileServer2_properties_typeProperties_host": {
+						"value": "[parameters('FileServer2_properties_typeProperties_host')]"
+					},
+					"FileServer2_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer2_properties_typeProperties_userId')]"
+					},
+					"FileServer3_properties_typeProperties_host": {
+						"value": "[parameters('FileServer3_properties_typeProperties_host')]"
+					},
+					"FileServer3_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer3_properties_typeProperties_userId')]"
+					},
+					"FileServer4_properties_typeProperties_host": {
+						"value": "[parameters('FileServer4_properties_typeProperties_host')]"
+					},
+					"FileServer4_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer4_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'steventrainingdatafactory_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "steventrainingdatafactory_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'steventrainingdatafactory_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "steventrainingdatafactory_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'steventrainingdatafactory_ArmTemplate_3')]"
+			]
+		}
+	]
+}
